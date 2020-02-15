@@ -4,6 +4,11 @@
     <span class="card-total-count">{{totalCount}}</span>
   </div>
   <div class="cell-content">
-
+    <app-kanban-card
+      *ngFor="let card of cards"
+      id="{{card.id}}"
+      title="{{card.title}}"
+      category="{{card.category}}"
+    ></app-kanban-card>
   </div>
 </div>
