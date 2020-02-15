@@ -1,0 +1,33 @@
+.header-bar {
+  padding: 0;
+}
+
+ul.nav.header-menu {
+  background-color: #026aa7;
+  color: white;
+  padding: 4px;
+}
+
+.header-menu-item {
+  display: block;
+  padding: 5px 15px;
+}
+
+.nav-pills > li > a {
+  background-color: hsla(0, 0%, 100%, .3);
+  color: white;
+  padding: 5px 15px;
+}
+
+.nav-pills > li > a > i {
+  color: #ecbeb3;
+  margin-right: 5px;
+}
+
+.nav-pills > li > a:hover {
+  background-color: hsla(0, 0%, 100%, .2);
+}
+
+.main-content {
+  padding-top: 20px;
+}
