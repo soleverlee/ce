@@ -1,0 +1,9 @@
+.kanban-cells {
+}
+
+.kanban-cell-container {
+  display: table-cell;
+  width: 264px;
+  padding-left: 8px;
+  padding-right: 8px;
+}

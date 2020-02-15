@@ -1,1 +1,8 @@
-<p>kanban works!</p>
+<div class="kanban-cells">
+  <app-kanban-cell
+    *ngFor="let cell of cells"
+    class="kanban-cell-container"
+    title="{{cell}}"
+    totalCount="0"
+  ></app-kanban-cell>
+</div>

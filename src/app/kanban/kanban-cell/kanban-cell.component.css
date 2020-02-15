@@ -1,0 +1,13 @@
+.cell-title {
+  margin-bottom: 5px;
+}
+
+.cell-content {
+  background-color: gray;
+  border-top: 2px solid gray;
+}
+
+.card-total-count {
+  float: right;
+  color: darkgreen;
+}
