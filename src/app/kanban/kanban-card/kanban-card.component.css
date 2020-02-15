@@ -4,3 +4,8 @@
   background-color: #eee;
   border-left: 3px solid darkgreen;
 }
+
+.card-id {
+  padding-right: 10px;
+  color: darkgreen;
+}
