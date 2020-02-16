@@ -1,4 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {CardService} from '../../service/card.service';
+import {CardItem} from '../../model/card';
 
 @Component({
   selector: 'app-kanban-cell',
@@ -6,20 +8,19 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./kanban-cell.component.css']
 })
 export class KanbanCellComponent implements OnInit {
+  @Input() cardStatus;
   @Input() title;
-  @Input() totalCount;
 
-  cards = [
-    {id: 1, title: 'Btree的Java实现', category: 'Java'},
-    {id: 2, title: '做一个todo List 应用', category: 'Java'},
-    {id: 3, title: 'Redis基础知识', category: 'Java'},
-    {id: 4, title: 'Rust基本知识', category: 'Java'},
-  ];
+  cards: CardItem[] = [];
 
-  constructor() {
+  constructor(private cardService: CardService) {
   }
 
   ngOnInit() {
+    this.cardService.getCards(this.cardStatus)
+      .subscribe(result => {
+        this.cards = result;
+      });
   }
 
 }

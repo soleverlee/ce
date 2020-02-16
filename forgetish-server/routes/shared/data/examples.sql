@@ -14,16 +14,17 @@ create table if not exists category (
 
 create table if not exists card_status (
     card_status integer primary key not null,
+    display integer default 1,
     name varchar(100) not null
 );
 
-insert into card_status (card_status, name)
+insert into card_status (card_status, display, name)
 values
-(-1, "已删除"),
-(0, "待实施"),
-(1, "正在进行"),
-(2, "已完成"),
-(3, "搁置");
+(-1, 0, "已删除"),
+(0, 1, "待实施"),
+(1, 1, "正在进行"),
+(2, 1, "已完成"),
+(3, 1, "搁置");
 
 insert into category (category_id, parent_category_id, name)
 values
