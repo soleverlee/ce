@@ -19,4 +19,7 @@ export class KanbanComponent implements OnInit {
     });
   }
 
+  getDisplayStatus() {
+    return this.cardStatus.filter(s => s.display);
+  }
 }

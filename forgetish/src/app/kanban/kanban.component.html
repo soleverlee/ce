@@ -1,6 +1,6 @@
 <div class="kanban-cells">
   <app-kanban-cell
-    *ngFor="let cardStatus of cardStatus"
+    *ngFor="let cardStatus of getDisplayStatus()"
     cardStatus="{{cardStatus.cardStatus}}"
     class="kanban-cell-container"
     title="{{cardStatus.name}}"
