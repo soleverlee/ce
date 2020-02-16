@@ -1,8 +1,8 @@
 <div class="kanban-cells">
   <app-kanban-cell
-    *ngFor="let cell of cells"
+    *ngFor="let cardStatus of cardStatus"
     class="kanban-cell-container"
-    title="{{cell}}"
-    totalCount="0"
+    title="{{cardStatus.name}}"
+    totalCount="{{cardStatus.totalCount}}"
   ></app-kanban-cell>
 </div>
