@@ -8,9 +8,9 @@ const db = new sqlite3.Database(dbPath, err => {
     }
 });
 
-function getCards(onSelected) {
-    const query = "select * from card_item order by card_id";
-    db.all(query, [], (err, rows) => {
+function getCards(status, onSelected) {
+    const query = "select * from card_item where card_status=? order by card_id";
+    db.all(query, [status], (err, rows) => {
         if (err) {
             return console.error(err.message);
         }

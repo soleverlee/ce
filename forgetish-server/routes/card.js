@@ -4,8 +4,7 @@ var db = require('./shared/db');
 
 
 router.get('/', function (req, res) {
-  db.getCards(rows => {
-    console.log(rows);
+  db.getCards(req.query.status, rows => {
     let result = rows.map(row => {
       return {
         cardId: row.card_id,
