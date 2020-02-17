@@ -16,25 +16,35 @@ export class DashboardComponent implements OnInit {
 
   constructor(private cardService: CardService) {
   }
-  
+
   _extendTreeNode(node: Category) {
     const isCard = node.type === 'card';
     const icon = isCard ? '/assets/task_created.png' : '/assets/category.png';
-    const title = isCard ? node.name : '<span style="color:grey">' + node.name + '</span>';
+    const css = isCard ? {
+      color: 'darkred',
+      'font-weight': 'bold',
+      'border-left': '3px solid darkgreen',
+    } : {};
+
     return {
       ...node,
-      name: title,
       icon,
+      font: css,
       children: node.children.map(child => this._extendTreeNode(child)),
     };
+  }
+
+  _getFont(treeId, node) {
+    return node.font ? node.font : {};
   }
 
   ngOnInit() {
     const setting = {
       view: {
-        nameIsHTML: true,
+        fontCss: this._getFont,
+        nameIsHTML: false,
         selectedMulti: false,
-      }
+      },
     };
     this.cardService.getCategories().subscribe(result => {
       const formatted = result.map(item => this._extendTreeNode(item));
