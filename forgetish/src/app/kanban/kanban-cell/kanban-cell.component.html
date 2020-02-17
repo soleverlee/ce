@@ -4,6 +4,13 @@
     <span class="card-total-count">{{cards.length}}</span>
   </div>
   <div class="cell-content">
+    <button
+      *ngIf="cardStatus == 0"
+      type="button"
+      class="btn btn-sm btn-default add-button">
+      <span class="glyphicon glyphicon-plus"></span>
+      新增任务
+    </button>
     <app-kanban-card
       *ngFor="let card of cards"
       id="{{card.cardId}}"

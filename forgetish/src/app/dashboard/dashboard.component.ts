@@ -16,11 +16,14 @@ export class DashboardComponent implements OnInit {
 
   constructor(private cardService: CardService) {
   }
-
+  
   _extendTreeNode(node: Category) {
-    const icon = node.type === 'card' ? '/assets/task_created.png' : '/assets/category.png';
+    const isCard = node.type === 'card';
+    const icon = isCard ? '/assets/task_created.png' : '/assets/category.png';
+    const title = isCard ? node.name : '<span style="color:grey">' + node.name + '</span>';
     return {
       ...node,
+      name: title,
       icon,
       children: node.children.map(child => this._extendTreeNode(child)),
     };
@@ -29,6 +32,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     const setting = {
       view: {
+        nameIsHTML: true,
         selectedMulti: false,
       }
     };

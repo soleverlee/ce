@@ -11,3 +11,8 @@
   float: right;
   color: darkgreen;
 }
+
+.add-button {
+  color: darkgreen;
+  margin-bottom: 10px;
+}

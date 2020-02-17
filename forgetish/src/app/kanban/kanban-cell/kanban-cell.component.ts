@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CardService} from '../../service/card.service';
 import {CardItem} from '../../model/card';
+import {CardStatus} from '../../model/card-status';
 
 @Component({
   selector: 'app-kanban-cell',
@@ -8,8 +9,8 @@ import {CardItem} from '../../model/card';
   styleUrls: ['./kanban-cell.component.css']
 })
 export class KanbanCellComponent implements OnInit {
-  @Input() cardStatus;
-  @Input() title;
+  @Input() cardStatus: number;
+  @Input() title: string;
 
   cards: CardItem[] = [];
 
