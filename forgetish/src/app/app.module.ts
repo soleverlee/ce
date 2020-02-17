@@ -9,7 +9,7 @@ import {KanbanCellComponent} from './kanban/kanban-cell/kanban-cell.component';
 import {KanbanCardComponent} from './kanban/kanban-card/kanban-card.component';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatSliderModule} from '@angular/material';
+import {MatButtonModule, MatSliderModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -24,6 +24,7 @@ import {MatSliderModule} from '@angular/material';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MatButtonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

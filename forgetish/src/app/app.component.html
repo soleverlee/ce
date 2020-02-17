@@ -1,11 +1,8 @@
-<div class="container-fluid header-bar">
-  <ul class="nav nav-pills header-menu">
-    <li><a href="/"><i class="glyphicon glyphicon-home"></i></a></li>
-    <li><a href="/dashboard"><i class="glyphicon glyphicon-indent-left"></i>控制台</a></li>
-    <li><a href="/kanban"><i class="glyphicon glyphicon-signal"></i>任务看板</a></li>
-    <li><span class="header-menu-item">Forgetish —— 一条容易忘记的鱼</span></li>
-  </ul>
+<div class="nav-top-bar">
+  <a href="/" mat-button>主页</a>
+  <a href="/dashboard" mat-button color="primary">任务概览</a>
+  <a href="/kanban" mat-button color="primary">看板</a>
 </div>
-<div class="container-fluid main-content">
+<div>
   <router-outlet></router-outlet>
 </div>
