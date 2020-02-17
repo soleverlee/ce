@@ -3,6 +3,7 @@ create table if not exists card_item (
     title varchar(100) not null,
     description text,
     card_status integer,
+    category varchar(100) not null,
     create_time integer
 );
 
@@ -69,11 +70,11 @@ values
 ('工具', 'VIM')
 ;
 
-insert into card_item(card_id, title, description, create_time, card_status)
+insert into card_item(card_id, category, title, description, create_time, card_status)
 values
-(1, 'Okapia APP开发', '完成基本的应用功能呢', 1581830469, 0),
-(2, 'Btree的Java实现', '实现增删改查', 1581830469, 1),
-(3, '一个TODO LIST的应用', '使用Angular和NodeJS完成一个TODO LIST应用', 1581830469, 1),
-(4, 'Redis学习', '学习Redis的基本知识', 1581830469, 2),
-(5, 'Rust学习', '使用Rust完成一个JVM引擎', 1581830469, 3)
+(1, 'Flutter', 'Okapia APP开发', '完成基本的应用功能呢', 1581830469, 0),
+(2, 'BTree', 'Btree的Java实现', '实现增删改查', 1581830469, 1),
+(3, '工具', '一个TODO LIST的应用', '使用Angular和NodeJS完成一个TODO LIST应用', 1581830469, 1),
+(4, 'Redis', 'Redis学习', '学习Redis的基本知识', 1581830469, 2),
+(5, 'Rust', 'Rust学习', '使用Rust完成一个JVM引擎', 1581830469, 3)
 ;

@@ -18,9 +18,10 @@ export class DashboardComponent implements OnInit {
   }
 
   _extendTreeNode(node: Category) {
+    const icon = node.type === 'card' ? '/assets/task_created.png' : '/assets/category.png';
     return {
       ...node,
-      icon: '/assets/category.png',
+      icon,
       children: node.children.map(child => this._extendTreeNode(child)),
     };
   }
