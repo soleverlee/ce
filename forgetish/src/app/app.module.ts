@@ -8,6 +8,8 @@ import {KanbanComponent} from './kanban/kanban.component';
 import {KanbanCellComponent} from './kanban/kanban-cell/kanban-cell.component';
 import {KanbanCardComponent} from './kanban/kanban-card/kanban-card.component';
 import {HttpClientModule} from '@angular/common/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatSliderModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,7 @@ import {HttpClientModule} from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
