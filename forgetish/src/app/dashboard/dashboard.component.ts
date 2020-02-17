@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import 'ztree';
 import {CardService} from '../service/card.service';
+import * as _ from 'lodash';
+import {Category} from '../model/category';
 
 declare var $: any;
 
@@ -15,6 +17,14 @@ export class DashboardComponent implements OnInit {
   constructor(private cardService: CardService) {
   }
 
+  _extendTreeNode(node: Category) {
+    return {
+      ...node,
+      icon: '/assets/category.png',
+      children: node.children.map(child => this._extendTreeNode(child)),
+    };
+  }
+
   ngOnInit() {
     const setting = {
       view: {
@@ -22,7 +32,9 @@ export class DashboardComponent implements OnInit {
       }
     };
     this.cardService.getCategories().subscribe(result => {
-      this.ztreeObject = $.fn.zTree.init($('#treeDemo'), setting, result);
+      const formatted = result.map(item => this._extendTreeNode(item));
+      console.log(formatted);
+      this.ztreeObject = $.fn.zTree.init($('#treeDemo'), setting, formatted);
     });
   }
 
