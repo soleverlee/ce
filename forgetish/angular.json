@@ -25,7 +25,7 @@
             ],
             "styles": [
               "src/styles.css",
-              "src/assets/customZTreeStyle/ztreeStyle.css"
+              "node_modules/ztree/css/ztreeStyle/ztreeStyle.css"
             ],
             "scripts": [
               "node_modules/ztree/js/jquery.ztree.core.min.js",
