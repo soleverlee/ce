@@ -10,14 +10,31 @@ declare var $: any;
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  ztreeObject: any;
 
   constructor(private cardService: CardService) {
   }
 
   ngOnInit() {
-    const setting = {};
+    const setting = {
+      view: {
+        selectedMulti: false,
+      }
+    };
     this.cardService.getCategories().subscribe(result => {
-      $.fn.zTree.init($('#treeDemo'), setting, result);
+      this.ztreeObject = $.fn.zTree.init($('#treeDemo'), setting, result);
     });
+  }
+
+  onExpand(expand: boolean) {
+    this.ztreeObject.expandAll(expand);
+  }
+
+  onExpandSelected(expand: boolean) {
+    const selected = this.ztreeObject.getSelectedNodes();
+    if (selected.length < 1) {
+      return;
+    }
+    this.ztreeObject.expandNode(selected[0], expand, true);
   }
 }

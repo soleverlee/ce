@@ -27,7 +27,6 @@ router.get('/', function (req, res) {
         parent_category: row.parent_category
       };
     });
-    console.log(categories);
     let tree = buildTree(categories);
     res.send(tree);
   });
