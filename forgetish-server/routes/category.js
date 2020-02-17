@@ -9,23 +9,22 @@ function buildTree(categories) {
 
 function buildNode(categories, category) {
   return {
-    id: category.id,
     name: category.name,
-    children: filter(categories, category.id)
+    children: filter(categories, category.name)
   };
 }
 
-function filter(categories, parentId) {
-  return categories.filter(category => category.parent_id === parentId);
+function filter(categories, parentCategory) {
+  return categories.filter(category => category.parent_category === parentCategory)
+    .map(category => buildNode(categories, category));
 }
 
 router.get('/', function (req, res) {
   db.getCategories(rows => {
     let categories = rows.map(row => {
       return {
-        id: row.category_id,
         name: row.name,
-        parent_id: row.parent_category_id
+        parent_category: row.parent_category
       };
     });
     console.log(categories);

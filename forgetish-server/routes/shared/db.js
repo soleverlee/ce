@@ -29,7 +29,7 @@ function getCardStatus(onSelected) {
 }
 
 function getCategories(onSelected) {
-    const query = "select * from category order by parent_category_id";
+    const query = "select * from category order by parent_category";
     db.all(query, [], (err, rows) => {
         if (err) {
             return console.error(err.message);
