@@ -28,17 +28,22 @@ async function getCards(status) {
 }
 
 async function getCardStatus() {
-  console.log('~~~');
   return executeQuery("select * from card_status order by card_status");
 }
 
-function getCategories(onSelected) {
+async function getCategories() {
   return executeQuery("select * from category order by parent_category");
+}
+
+async function createCategory(name, parentCategory) {
+  const db = await getDatabase();
+  return db.run("insert into category(name, parent_category) values (?, ?)", name, parentCategory);
 }
 
 module.exports = {
   getCards,
   getAllCards,
   getCardStatus,
-  getCategories
+  getCategories,
+  createCategory,
 };

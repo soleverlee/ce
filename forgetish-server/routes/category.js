@@ -19,7 +19,7 @@ class TreeBuilder {
   }
 
   buildTreeNode(category) {
-    let children = this.getChildCategories( category.name);
+    let children = this.getChildCategories(category.name);
     let cards = this.cardRows.filter(card => card.category === category.name)
       .map(card => {
         return {
@@ -48,6 +48,13 @@ router.get('/', async function (req, res) {
   });
   const tree = new TreeBuilder(categories, cardRows).build();
   res.send(tree);
+});
+
+router.post('/', async function (req, res, next) {
+  const {name, parent} = req.body;
+  console.log(name, parent);
+  await db.createCategory(name, parent);
+  res.send(true);
 });
 
 module.exports = router;
