@@ -2,32 +2,39 @@ var express = require('express');
 var router = express.Router();
 var db = require('./shared/db');
 
-function buildTree(categories, cardRows) {
-  let rootNodes = getChildCategories(categories, null, cardRows);
-  return rootNodes.map(node => buildNode(categories, node, cardRows));
-}
+class TreeBuilder {
+  constructor(categories, cards) {
+    this.categoryRows = categories;
+    this.cardRows = cards;
+  }
 
-function buildNode(categories, category, cardRows) {
-  let children = getChildCategories(categories, category.name, cardRows);
-  let cards = cardRows.filter(card => card.category === category.name)
-    .map(card => {
-      return {
-        name: card.title,
-        type: 'card',
-        rawCard: card,
-        children: [],
-      }
-    });
-  return {
-    name: category.name,
-    type: 'category',
-    children: children.concat(cards),
-  };
-}
+  build() {
+    let rootNodes = this.getChildCategories(null);
+    return rootNodes.map(node => this.buildTreeNode(node));
+  }
 
-function getChildCategories(categories, parentCategory, cardRows) {
-  return categories.filter(category => category.parent_category === parentCategory)
-    .map(category => buildNode(categories, category, cardRows));
+  getChildCategories(parentCategory) {
+    return this.categoryRows.filter(category => category.parent_category === parentCategory)
+      .map(category => this.buildTreeNode(category));
+  }
+
+  buildTreeNode(category) {
+    let children = this.getChildCategories( category.name);
+    let cards = this.cardRows.filter(card => card.category === category.name)
+      .map(card => {
+        return {
+          name: card.title,
+          type: 'card',
+          rawCard: card,
+          children: [],
+        }
+      });
+    return {
+      name: category.name,
+      type: 'category',
+      children: children.concat(cards),
+    };
+  }
 }
 
 router.get('/', async function (req, res) {
@@ -39,7 +46,7 @@ router.get('/', async function (req, res) {
       parent_category: row.parent_category
     };
   });
-  const tree = buildTree(categories, cardRows);
+  const tree = new TreeBuilder(categories, cardRows).build();
   res.send(tree);
 });
 
