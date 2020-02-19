@@ -27,7 +27,6 @@ export class DashboardComponent implements OnInit {
     const icon = isCard ? '/assets/task_created.png' : '/assets/category.png';
     const css = isCard ? {
       color: 'darkred',
-      'font-weight': 'bold',
       'border-left': '3px solid darkgreen',
     } : {};
 
