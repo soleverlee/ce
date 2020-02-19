@@ -46,6 +46,9 @@ export class DashboardComponent implements OnInit {
     this._refreshTree();
   }
 
+  _zTreeOnDragMove(event, treeId, treeNodes) {
+  }
+
   _refreshTree() {
     const setting = {
       view: {
@@ -53,6 +56,21 @@ export class DashboardComponent implements OnInit {
         nameIsHTML: false,
         selectedMulti: false,
       },
+      edit: {
+        enable: true,
+        showRemoveBtn: false,
+        showRenameBtn: false,
+        drag: {
+          isCopy: false,//所有操作都是move
+          isMove: true,
+          prev: true,
+          next: true,
+          inner: true
+        }
+      },
+      callback: {
+        onDragMove: this._zTreeOnDragMove,
+      }
     };
     this.cardService.getCategories().subscribe(result => {
       const formatted = result.map(item => this._extendTreeNode(item));
