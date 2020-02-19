@@ -44,6 +44,10 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+    this._refreshTree();
+  }
+
+  _refreshTree() {
     const setting = {
       view: {
         fontCss: this._getFont,
@@ -53,7 +57,6 @@ export class DashboardComponent implements OnInit {
     };
     this.cardService.getCategories().subscribe(result => {
       const formatted = result.map(item => this._extendTreeNode(item));
-      console.log(formatted);
       this.ztreeObject = $.fn.zTree.init($('#categoryTree'), setting, formatted);
     });
   }
@@ -86,15 +89,11 @@ export class DashboardComponent implements OnInit {
       if (!result) {
         return;
       }
-      console.log('The dialog was closed');
-      console.log(result);
       this.cardService.createCategory(result.categoryName, result.parentCategory)
         .subscribe(success => {
-          console.log(success);
+          this._refreshTree();
         }, error => {
-          this._snackBar.open('创建分类失败', result.categoryName, {
-            duration: 2000,
-          });
+          this._snackBar.open('创建分类失败', result.categoryName);
         });
     });
   }
