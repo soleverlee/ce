@@ -1,51 +1,39 @@
 var path = require('path');
 
-const sqlite3 = require('sqlite3').verbose();
+const sqlite = require('sqlite-async');
+
 const dbPath = path.join(__dirname, "data", "data.db");
-const db = new sqlite3.Database(dbPath, err => {
-  if (err) {
-    return console.error(err.message);
+
+let dbInstance;
+
+async function getDatabase() {
+  if (!dbInstance) {
+    dbInstance = await sqlite.open(dbPath);
   }
-});
-
-function getAllCards(onSelected) {
-  const query = "select * from card_item order by card_id";
-  db.all(query, [], (err, rows) => {
-    if (err) {
-      return console.error(err.message);
-    }
-    onSelected(rows);
-  })
+  return dbInstance;
 }
 
-function getCards(status, onSelected) {
+async function executeQuery(sql, params = []) {
+  const db = await getDatabase();
+  return db.all(sql, params);
+}
+
+async function getAllCards() {
+  return executeQuery("select * from card_item order by card_id");
+}
+
+async function getCards(status) {
   const query = "select * from card_item where card_status=? order by card_id";
-  db.all(query, [status], (err, rows) => {
-    if (err) {
-      return console.error(err.message);
-    }
-    onSelected(rows);
-  })
+  return executeQuery(query, [status]);
 }
 
-function getCardStatus(onSelected) {
-  const query = "select * from card_status order by card_status";
-  db.all(query, [], (err, rows) => {
-    if (err) {
-      return console.error(err.message);
-    }
-    onSelected(rows);
-  })
+async function getCardStatus() {
+  console.log('~~~');
+  return executeQuery("select * from card_status order by card_status");
 }
 
 function getCategories(onSelected) {
-  const query = "select * from category order by parent_category";
-  db.all(query, [], (err, rows) => {
-    if (err) {
-      return console.error(err.message);
-    }
-    onSelected(rows);
-  })
+  return executeQuery("select * from category order by parent_category");
 }
 
 module.exports = {

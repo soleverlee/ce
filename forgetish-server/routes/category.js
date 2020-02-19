@@ -30,19 +30,17 @@ function getChildCategories(categories, parentCategory, cardRows) {
     .map(category => buildNode(categories, category, cardRows));
 }
 
-router.get('/', function (req, res) {
-  db.getCategories(categoryRows => {
-    db.getAllCards(cardRows => {
-      let categories = categoryRows.map(row => {
-        return {
-          name: row.name,
-          parent_category: row.parent_category
-        };
-      });
-      let tree = buildTree(categories, cardRows);
-      res.send(tree);
-    });
+router.get('/', async function (req, res) {
+  const categoryRows = await db.getCategories();
+  const cardRows = await db.getAllCards();
+  const categories = categoryRows.map(row => {
+    return {
+      name: row.name,
+      parent_category: row.parent_category
+    };
   });
+  const tree = buildTree(categories, cardRows);
+  res.send(tree);
 });
 
 module.exports = router;
