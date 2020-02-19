@@ -26,7 +26,8 @@
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.css",
-              "src/assets/ztreeStyle/ztreeStyle.css"
+              "src/assets/ztreeStyle/ztreeStyle.css",
+              "src/assets/iconfont/iconfont.css"
             ],
             "scripts": [
               "node_modules/ztree/js/jquery.ztree.core.min.js",

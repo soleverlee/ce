@@ -1,27 +1,40 @@
-<div class="">
-  <button
-    (click)="onExpand(true)"
-    type="button"
-    class="btn btn-sm btn-link">
-    展开全部
-  </button>
-  <button
-    (click)="onExpand(false)"
-    type="button"
-    class="btn btn-sm btn-link">
-    折叠全部
-  </button>
-  <button
-    (click)="onExpandSelected(true)"
-    type="button"
-    class="btn btn-sm btn-link">
-    展开选中
-  </button>
-  <button
-    (click)="onExpandSelected(false)"
-    type="button"
-    class="btn btn-sm btn-link">
-    折叠选中
-  </button>
-</div>
-<ul id="treeDemo" class="ztree"></ul>
+<mat-drawer-container class="tree-container">
+
+  <mat-drawer mode="side" opened>
+    <div class="tree-sidebar">
+      <button mat-button
+              (click)="onExpand(true)"
+              type="button"
+              class="small-button">
+        <span class="iconfont icondouble-arro-right"></span>
+      </button>
+      <button mat-button
+              (click)="onExpand(false)"
+              type="button"
+              class="small-button">
+        <span class="iconfont icondouble-arrow-left"></span>
+      </button>
+      <button mat-button
+              (click)="onExpandSelected(true)"
+              type="button"
+              class="small-button">
+        <span class="iconfont iconarrow-down"></span>
+      </button>
+      <button mat-button
+              (click)="onExpandSelected(false)"
+              type="button"
+              class="small-button">
+        <span class="iconfont iconarrow-up"></span>
+      </button>
+      <button mat-button
+              (click)="onExpandSelected(false)"
+              type="button"
+              class="small-button">
+        <span class="iconfont iconadd-select"></span>
+      </button>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content>
+    <ul id="treeDemo" class="ztree"></ul>
+  </mat-drawer-content>
+</mat-drawer-container>
