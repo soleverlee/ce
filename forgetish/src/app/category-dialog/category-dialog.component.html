@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>创建新的分类</h1>
+<div mat-dialog-content>
+  <div *ngIf="data.parentCategory" class="tip">新创建的分类将位于:
+    <div class="parent-category">{{data.parentCategory}}</div>
+  </div>
+  <mat-form-field>
+    <mat-label>分类名称</mat-label>
+    <input matInput [(ngModel)]="data.categoryName">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button color="primary" cdkFocusInitial [mat-dialog-close]="data">确认创建</button>
+</div>

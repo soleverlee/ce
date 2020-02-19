@@ -9,7 +9,9 @@ import {KanbanCellComponent} from './kanban/kanban-cell/kanban-cell.component';
 import {KanbanCardComponent} from './kanban/kanban-card/kanban-card.component';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatSidenavModule, MatSliderModule} from '@angular/material';
+import {MatButtonModule, MatDialogModule, MatInputModule, MatSidenavModule, MatSliderModule} from '@angular/material';
+import {CategoryDialogComponent} from './category-dialog/category-dialog.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,15 +19,22 @@ import {MatButtonModule, MatSidenavModule, MatSliderModule} from '@angular/mater
     DashboardComponent,
     KanbanComponent,
     KanbanCellComponent,
-    KanbanCardComponent
+    KanbanCardComponent,
+    CategoryDialogComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    FormsModule,
     MatButtonModule,
     MatSidenavModule,
+    MatDialogModule,
+    MatInputModule,
+  ],
+  entryComponents: [
+    CategoryDialogComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

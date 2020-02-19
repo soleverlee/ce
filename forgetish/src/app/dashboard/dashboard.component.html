@@ -27,7 +27,7 @@
         <span class="iconfont iconarrow-up"></span>
       </button>
       <button mat-button
-              (click)="onExpandSelected(false)"
+              (click)="openAddDialog()"
               type="button"
               class="small-button">
         <span class="iconfont iconadd-select"></span>
@@ -35,6 +35,6 @@
     </div>
   </mat-drawer>
   <mat-drawer-content>
-    <ul id="treeDemo" class="ztree"></ul>
+    <ul id="categoryTree" class="ztree"></ul>
   </mat-drawer-content>
 </mat-drawer-container>

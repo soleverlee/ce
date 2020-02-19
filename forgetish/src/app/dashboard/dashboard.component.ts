@@ -3,6 +3,8 @@ import 'ztree';
 import {CardService} from '../service/card.service';
 import * as _ from 'lodash';
 import {Category} from '../model/category';
+import {MatDialog} from '@angular/material';
+import {CategoryDialogComponent} from '../category-dialog/category-dialog.component';
 
 declare var $: any;
 
@@ -14,7 +16,7 @@ declare var $: any;
 export class DashboardComponent implements OnInit {
   ztreeObject: any;
 
-  constructor(private cardService: CardService) {
+  constructor(private cardService: CardService, public dialog: MatDialog) {
   }
 
   _extendTreeNode(node: Category) {
@@ -49,7 +51,7 @@ export class DashboardComponent implements OnInit {
     this.cardService.getCategories().subscribe(result => {
       const formatted = result.map(item => this._extendTreeNode(item));
       console.log(formatted);
-      this.ztreeObject = $.fn.zTree.init($('#treeDemo'), setting, formatted);
+      this.ztreeObject = $.fn.zTree.init($('#categoryTree'), setting, formatted);
     });
   }
 
@@ -63,5 +65,23 @@ export class DashboardComponent implements OnInit {
       return;
     }
     this.ztreeObject.expandNode(selected[0], expand, true);
+  }
+
+  openAddDialog() {
+    let parentCategory = null;
+    const selected = this.ztreeObject.getSelectedNodes();
+    if (selected.length === 1) {
+      parentCategory = selected[0].name;
+      console.log(parentCategory);
+    }
+    const dialogRef = this.dialog.open(CategoryDialogComponent, {
+      width: '250px',
+      data: {parentCategory},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+    });
   }
 }
