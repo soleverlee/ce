@@ -9,7 +9,7 @@ import {KanbanCellComponent} from './kanban/kanban-cell/kanban-cell.component';
 import {KanbanCardComponent} from './kanban/kanban-card/kanban-card.component';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatDialogModule, MatInputModule, MatSidenavModule, MatSliderModule} from '@angular/material';
+import {MatButtonModule, MatDialogModule, MatInputModule, MatSidenavModule, MatSliderModule, MatSnackBarModule} from '@angular/material';
 import {CategoryDialogComponent} from './category-dialog/category-dialog.component';
 import {FormsModule} from '@angular/forms';
 
@@ -32,6 +32,7 @@ import {FormsModule} from '@angular/forms';
     MatSidenavModule,
     MatDialogModule,
     MatInputModule,
+    MatSnackBarModule,
   ],
   entryComponents: [
     CategoryDialogComponent,

@@ -27,4 +27,11 @@ export class CardService {
         params: {status}
       });
   }
+
+  createCategory(name: string, parentCategory: string): Observable<boolean> {
+    return this.http.post<boolean>('/api/categories', {
+      name,
+      parent: parentCategory,
+    });
+  }
 }

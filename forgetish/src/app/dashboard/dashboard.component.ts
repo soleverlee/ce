@@ -3,7 +3,7 @@ import 'ztree';
 import {CardService} from '../service/card.service';
 import * as _ from 'lodash';
 import {Category} from '../model/category';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatSnackBar} from '@angular/material';
 import {CategoryDialogComponent} from '../category-dialog/category-dialog.component';
 
 declare var $: any;
@@ -16,7 +16,10 @@ declare var $: any;
 export class DashboardComponent implements OnInit {
   ztreeObject: any;
 
-  constructor(private cardService: CardService, public dialog: MatDialog) {
+  constructor(
+    private _snackBar: MatSnackBar,
+    private cardService: CardService,
+    public dialog: MatDialog) {
   }
 
   _extendTreeNode(node: Category) {
@@ -80,8 +83,19 @@ export class DashboardComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      if (!result) {
+        return;
+      }
       console.log('The dialog was closed');
       console.log(result);
+      this.cardService.createCategory(result.categoryName, result.parentCategory)
+        .subscribe(success => {
+          console.log(success);
+        }, error => {
+          this._snackBar.open('创建分类失败', result.categoryName, {
+            duration: 2000,
+          });
+        });
     });
   }
 }
