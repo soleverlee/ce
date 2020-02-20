@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
 
   extendTreeNode = (node: Category) => {
     const isCard = node.type === 'card';
-    const icon = isCard ? '/assets/task_created.png' : '/assets/category.png';
+    const icon = isCard ? '/assets/task.png' : '/assets/category.png';
     const css = isCard ? {
       color: 'darkred',
       'border-left': '3px solid darkgreen',
