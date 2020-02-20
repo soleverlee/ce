@@ -29,4 +29,16 @@ router.get('/all_status', async function (req, res) {
   res.send(result);
 });
 
+router.post('/move', async function (req, res) {
+  const {id, category} = req.body;
+  const rows = await db.moveCard(id, category);
+  res.send(rows);
+});
+
+router.post('/remove', async function (req, res) {
+  const {id} = req.body;
+  const rows = await db.removeCard(id);
+  res.send(rows);
+});
+
 module.exports = router;

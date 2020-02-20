@@ -65,4 +65,11 @@ router.post('/move', async function (req, res, next) {
   res.send(updatedRows);
 });
 
+router.post('/remove', async function (req, res, next) {
+  const {name} = req.body;
+  const updatedRows = await db.removeCategory(name);
+
+  res.send(updatedRows);
+});
+
 module.exports = router;

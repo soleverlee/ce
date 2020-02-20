@@ -41,4 +41,23 @@ export class CardService {
       parent: parentCategory,
     });
   }
+
+  moveCard(id: number, category: string): Observable<boolean> {
+    return this.http.post<boolean>('/api/cards/move', {
+      id,
+      category,
+    });
+  }
+
+  removeCard(id: number): Observable<boolean> {
+    return this.http.post<boolean>('/api/cards/remove', {
+      id,
+    });
+  }
+
+  removeCategory(name: string): Observable<boolean> {
+    return this.http.post<boolean>('/api/categories/remove', {
+      name,
+    });
+  }
 }

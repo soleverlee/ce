@@ -45,6 +45,23 @@ async function moveCategory(name, newParentCategory) {
   return db.run("update category set parent_category=? where name=?", newParentCategory, name);
 }
 
+async function moveCard(id, category) {
+  const db = await getDatabase();
+  console.log(category, id);
+  return db.run("update card_item set category=? where card_id=?", category, id);
+}
+
+
+async function removeCategory(name) {
+  const db = await getDatabase();
+  return db.run("delete from category where name=?", name);
+}
+
+async function removeCard(id) {
+  const db = await getDatabase();
+  return db.run("delete from card_item where card_id=?", id);
+}
+
 module.exports = {
   getCards,
   getAllCards,
@@ -52,4 +69,7 @@ module.exports = {
   getCategories,
   createCategory,
   moveCategory,
+  removeCategory,
+  moveCard,
+  removeCard,
 };

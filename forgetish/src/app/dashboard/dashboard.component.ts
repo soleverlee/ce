@@ -47,15 +47,25 @@ export class DashboardComponent implements OnInit {
   }
 
   zTreeOnDrop = (event, treeId, treeNodes, targetNode, moveType) => {
-    const selected = treeNodes[0].name;
+    const selected = treeNodes[0];
     const target = targetNode ? targetNode.name : null;
-    this.cardService.moveCategory(selected, target)
-      .subscribe(success => {
-      }, error => {
-        console.error(error);
-        this._snackBar.open('移动分类失败', selected);
-        this.refreshTree();
-      });
+    if (selected.type == 'card') {
+      this.cardService.moveCard(selected.rawCard.card_id, target)
+        .subscribe(success => {
+        }, error => {
+          console.error(error);
+          this._snackBar.open('移动任务失败', selected.name);
+          this.refreshTree();
+        });
+    } else {
+      this.cardService.moveCategory(selected.name, target)
+        .subscribe(success => {
+        }, error => {
+          console.error(error);
+          this._snackBar.open('移动分类失败', selected.name);
+          this.refreshTree();
+        });
+    }
   };
 
   refreshTree = () => {
@@ -118,5 +128,26 @@ export class DashboardComponent implements OnInit {
           this._snackBar.open('创建分类失败', result.categoryName);
         });
     });
+  };
+
+  removeItem = () => {
+    const selected = this.ztreeObject.getSelectedNodes();
+    if (selected.length !== 1) {
+      return;
+    }
+    const node = selected[0];
+    if (node.type === 'card') {
+      this.cardService.removeCard(node.rawCard.card_id).subscribe(success => {
+        this.ztreeObject.removeNode(selected[0]);
+      }, error => {
+        this._snackBar.open('删除任务失败', node.name);
+      });
+    } else {
+      this.cardService.removeCategory(node.name).subscribe(success => {
+        this.ztreeObject.removeNode(selected[0]);
+      }, error => {
+        this._snackBar.open('删除分类失败', node.name);
+      });
+    }
   };
 }
