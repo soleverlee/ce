@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import 'ztree';
 import {CardService} from '../service/card.service';
-import * as _ from 'lodash';
 import {Category} from '../model/category';
 import {MatDialog, MatSnackBar} from '@angular/material';
 import {CategoryDialogComponent} from '../category-dialog/category-dialog.component';
@@ -20,9 +19,10 @@ export class DashboardComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private cardService: CardService,
     public dialog: MatDialog) {
+    console.log('card service:', this.cardService);
   }
 
-  _extendTreeNode(node: Category) {
+  extendTreeNode = (node: Category) => {
     const isCard = node.type === 'card';
     const icon = isCard ? '/assets/task_created.png' : '/assets/category.png';
     const css = isCard ? {
@@ -34,25 +34,34 @@ export class DashboardComponent implements OnInit {
       ...node,
       icon,
       font: css,
-      children: node.children.map(child => this._extendTreeNode(child)),
+      children: node.children.map(child => this.extendTreeNode(child)),
     };
-  }
+  };
 
-  _getFont(treeId, node) {
+  getFont = (treeId, node) => {
     return node.font ? node.font : {};
-  }
+  };
 
   ngOnInit() {
-    this._refreshTree();
+    this.refreshTree();
   }
 
-  _zTreeOnDragMove(event, treeId, treeNodes) {
-  }
+  zTreeOnDrop = (event, treeId, treeNodes, targetNode, moveType) => {
+    const selected = treeNodes[0].name;
+    const target = targetNode ? targetNode.name : null;
+    this.cardService.moveCategory(selected, target)
+      .subscribe(success => {
+      }, error => {
+        console.error(error);
+        this._snackBar.open('移动分类失败', selected);
+        this.refreshTree();
+      });
+  };
 
-  _refreshTree() {
+  refreshTree = () => {
     const setting = {
       view: {
-        fontCss: this._getFont,
+        fontCss: this.getFont,
         nameIsHTML: false,
         selectedMulti: false,
       },
@@ -61,36 +70,32 @@ export class DashboardComponent implements OnInit {
         showRemoveBtn: false,
         showRenameBtn: false,
         drag: {
-          isCopy: false,//所有操作都是move
-          isMove: true,
-          prev: true,
-          next: true,
-          inner: true
+          isCopy: false,
         }
       },
       callback: {
-        onDragMove: this._zTreeOnDragMove,
+        onDrop: this.zTreeOnDrop,
       }
     };
     this.cardService.getCategories().subscribe(result => {
-      const formatted = result.map(item => this._extendTreeNode(item));
+      const formatted = result.map(item => this.extendTreeNode(item));
       this.ztreeObject = $.fn.zTree.init($('#categoryTree'), setting, formatted);
     });
-  }
+  };
 
-  onExpand(expand: boolean) {
+  onExpand = (expand: boolean) => {
     this.ztreeObject.expandAll(expand);
-  }
+  };
 
-  onExpandSelected(expand: boolean) {
+  onExpandSelected = (expand: boolean) => {
     const selected = this.ztreeObject.getSelectedNodes();
     if (selected.length < 1) {
       return;
     }
     this.ztreeObject.expandNode(selected[0], expand, true);
-  }
+  };
 
-  openAddDialog() {
+  openAddDialog = () => {
     let parentCategory = null;
     const selected = this.ztreeObject.getSelectedNodes();
     if (selected.length === 1) {
@@ -108,10 +113,10 @@ export class DashboardComponent implements OnInit {
       }
       this.cardService.createCategory(result.categoryName, result.parentCategory)
         .subscribe(success => {
-          this._refreshTree();
+          this.refreshTree();
         }, error => {
           this._snackBar.open('创建分类失败', result.categoryName);
         });
     });
-  }
+  };
 }

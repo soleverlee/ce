@@ -57,4 +57,12 @@ router.post('/', async function (req, res, next) {
   res.send(true);
 });
 
+router.post('/move', async function (req, res, next) {
+  const {name, parent} = req.body;
+  console.log(name, parent);
+  const updatedRows = await db.moveCategory(name, parent);
+
+  res.send(updatedRows);
+});
+
 module.exports = router;

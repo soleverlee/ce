@@ -40,10 +40,16 @@ async function createCategory(name, parentCategory) {
   return db.run("insert into category(name, parent_category) values (?, ?)", name, parentCategory);
 }
 
+async function moveCategory(name, newParentCategory) {
+  const db = await getDatabase();
+  return db.run("update category set parent_category=? where name=?", newParentCategory, name);
+}
+
 module.exports = {
   getCards,
   getAllCards,
   getCardStatus,
   getCategories,
   createCategory,
+  moveCategory,
 };

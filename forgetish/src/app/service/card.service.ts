@@ -34,4 +34,11 @@ export class CardService {
       parent: parentCategory,
     });
   }
+
+  moveCategory(name: string, parentCategory: string): Observable<number> {
+    return this.http.post<number>('/api/categories/move', {
+      name,
+      parent: parentCategory,
+    });
+  }
 }
