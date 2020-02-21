@@ -10,7 +10,10 @@ declare var $: any;
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
+  host: {
+    class: 'full-height'
+  },
 })
 export class DashboardComponent implements OnInit {
   ztreeObject: any;
@@ -27,6 +30,7 @@ export class DashboardComponent implements OnInit {
     const icon = isCard ? '/assets/task.png' : '/assets/category.png';
     const css = isCard ? {
       color: 'darkred',
+      'font-weight': '500',
       'border-left': '3px solid darkgreen',
     } : {};
 

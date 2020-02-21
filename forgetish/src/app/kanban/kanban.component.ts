@@ -5,7 +5,10 @@ import {CardStatus} from '../model/card-status';
 @Component({
   selector: 'app-kanban',
   templateUrl: './kanban.component.html',
-  styleUrls: ['./kanban.component.css']
+  styleUrls: ['./kanban.component.css'],
+  host: {
+    class: 'full-width',
+  },
 })
 export class KanbanComponent implements OnInit {
   cardStatus: CardStatus[];

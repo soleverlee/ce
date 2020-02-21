@@ -1,9 +1,17 @@
+html, body {
+  height: 100%;
+}
+
 .kanban-cells {
+  background: lightblue;
+  height: 100%;
 }
 
 .kanban-cell-container {
-  display: table-cell;
+  background: #eee;
   width: 264px;
-  padding-left: 8px;
-  padding-right: 8px;
+  padding: 10px 15px;
+  margin-right: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
 }

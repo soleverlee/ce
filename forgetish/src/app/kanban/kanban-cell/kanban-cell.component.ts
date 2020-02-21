@@ -6,7 +6,7 @@ import {CardStatus} from '../../model/card-status';
 @Component({
   selector: 'app-kanban-cell',
   templateUrl: './kanban-cell.component.html',
-  styleUrls: ['./kanban-cell.component.css']
+  styleUrls: ['./kanban-cell.component.css'],
 })
 export class KanbanCellComponent implements OnInit {
   @Input() cardStatus: number;

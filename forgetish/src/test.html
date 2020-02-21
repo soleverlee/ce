@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Testing layout</title>
+  <base href="/">
+  <style>
+    .top {
+      height: 50px;
+      background: gray;
+    }
+
+    html, body {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .content {
+      border: 1px solid darkgrey;
+      background: lightblue;
+      flex: 1;
+      flex-direction: column;
+      display: flex;
+    }
+
+    .filter {
+
+    }
+
+    .columns {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      border: 1px solid rebeccapurple;
+    }
+
+    .column {
+      width: 100px;
+      background: lavenderblush;
+      border: 1px solid red;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="top">
+    Top
+  </div>
+  <div class="content">
+    <div class="filter">Filter<input></div>
+    <div class="columns">
+      <div class="column">1</div>
+      <div class="column">2</div>
+      <div class="column"></div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
