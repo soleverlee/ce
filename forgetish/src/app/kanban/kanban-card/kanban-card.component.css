@@ -10,3 +10,19 @@
   padding-right: 10px;
   color: darkgreen;
 }
+
+.card-title {
+  font-size: 14px;
+}
+
+.card-description {
+  color: gray;
+  font-size: 12px;
+}
+
+.card-category {
+  font-size: 12px;
+  margin-top: 5px;
+  color: lightcoral;
+  text-align: right;
+}

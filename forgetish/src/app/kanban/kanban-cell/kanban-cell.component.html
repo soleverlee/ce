@@ -13,8 +13,7 @@
     </button>
     <app-kanban-card
       *ngFor="let card of cards"
-      id="{{card.cardId}}"
-      title="{{card.title}}"
+      [card]="card"
     ></app-kanban-card>
   </div>
 </div>

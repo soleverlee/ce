@@ -8,6 +8,7 @@ router.get('/', async function (req, res) {
   const result = rows.map(row => {
     return {
       cardId: row.card_id,
+      category: row.category,
       title: row.title,
       description: row.description,
       cardStatus: row.card_status,
