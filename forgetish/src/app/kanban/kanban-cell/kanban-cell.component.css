@@ -16,3 +16,10 @@
   color: darkgreen;
   margin-bottom: 10px;
 }
+
+.drop-area {
+  min-height: 200px;
+  border-radius: 5px;
+  border: 1px dashed #dbdbdb;
+  flex: 1;
+}

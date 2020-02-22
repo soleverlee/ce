@@ -12,6 +12,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatDialogModule, MatInputModule, MatSidenavModule, MatSliderModule, MatSnackBarModule} from '@angular/material';
 import {CategoryDialogComponent} from './category-dialog/category-dialog.component';
 import {FormsModule} from '@angular/forms';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import {FormsModule} from '@angular/forms';
     MatDialogModule,
     MatInputModule,
     MatSnackBarModule,
+    DragDropModule,
   ],
   entryComponents: [
     CategoryDialogComponent,

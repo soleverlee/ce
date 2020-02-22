@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {CardService} from '../../service/card.service';
 import {CardItem} from '../../model/card';
 import {CardStatus} from '../../model/card-status';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-kanban-cell',
@@ -24,4 +25,14 @@ export class KanbanCellComponent implements OnInit {
       });
   }
 
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex);
+    }
+  }
 }

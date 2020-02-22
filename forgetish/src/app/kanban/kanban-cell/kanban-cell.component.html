@@ -1,19 +1,20 @@
-<div>
-  <div class="cell-title">
-    <span>{{title}}</span>
-    <span class="card-total-count">{{cards.length}}</span>
-  </div>
-  <div class="cell-content">
-    <button *ngIf="cardStatus == 0"
-            mat-button
-            color="primary"
-            type="button"
-            class="small-button">
-      新增任务
-    </button>
-    <app-kanban-card
-      *ngFor="let card of cards"
-      [card]="card"
-    ></app-kanban-card>
+<div class="cell-title">
+  <span>{{title}}</span>
+  <span class="card-total-count">{{cards.length}}</span>
+</div>
+<div class="cell-content drop-area"
+     cdkDropList
+     [cdkDropListData]="cards"
+     (cdkDropListDropped)="drop($event)"
+     id="card-drag-{{cardStatus}}">
+  <button *ngIf="cardStatus == 0"
+          mat-button
+          color="primary"
+          type="button"
+          class="small-button">
+    新增任务
+  </button>
+  <div cdkDrag *ngFor="let card of cards">
+    <app-kanban-card [card]="card"></app-kanban-card>
   </div>
 </div>

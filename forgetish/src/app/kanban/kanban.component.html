@@ -1,7 +1,10 @@
-<app-kanban-cell
-  *ngFor="let cardStatus of getDisplayStatus()"
-  showAddButton="true"
-  cardStatus="{{cardStatus.cardStatus}}"
-  class="kanban-cell-container"
-  title="{{cardStatus.name}}"
-></app-kanban-cell>
+<div cdkDropListGroup class="kanban-cells">
+  <app-kanban-cell
+    *ngFor="let cardStatus of getDisplayStatus()"
+    showAddButton="true"
+    cardStatus="{{cardStatus.cardStatus}}"
+    title="{{cardStatus.name}}"
+    class="kanban-cell-container"
+  ></app-kanban-cell>
+</div>
+

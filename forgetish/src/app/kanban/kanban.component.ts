@@ -11,7 +11,7 @@ import {CardStatus} from '../model/card-status';
   },
 })
 export class KanbanComponent implements OnInit {
-  cardStatus: CardStatus[];
+  cardStatus: CardStatus[] = [];
 
   constructor(private cardService: CardService) {
   }
