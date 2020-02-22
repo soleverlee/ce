@@ -26,6 +26,9 @@ export class KanbanCellComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<string[]>) {
+    console.log(event.container.data, event.previousIndex, event.currentIndex);
+    const status = Number(event.container.id.replace('card-drag-', ''));
+    const card = event.previousContainer.data[event.previousIndex];
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -33,6 +36,19 @@ export class KanbanCellComponent implements OnInit {
         event.container.data,
         event.previousIndex,
         event.currentIndex);
+      this.cardService.updateCardStatus(card.cardId, status)
+        .subscribe(result => {
+          console.log(result);
+        });
     }
+
+    const rankMapping = [];
+    for (let i = 0; i < this.cards.length; i++) {
+      rankMapping.push({id: this.cards[i].cardId, rank: i});
+    }
+    this.cardService.updateCardRank(rankMapping)
+      .subscribe(result => {
+        console.log(result);
+      });
   }
 }

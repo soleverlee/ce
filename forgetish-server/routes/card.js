@@ -42,4 +42,15 @@ router.post('/remove', async function (req, res) {
   res.send(rows);
 });
 
+router.post('/updateStatus', async function (req, res) {
+  const {id, status} = req.body;
+  const rows = await db.updateCardStatus(id, status);
+  res.send(rows);
+});
+
+router.post('/updateRank', async function (req, res) {
+  const rows = await db.updateCardRanking(req.body);
+  res.send(rows);
+});
+
 module.exports = router;

@@ -4,6 +4,7 @@ import {CardStatus} from '../model/card-status';
 import {HttpClient} from '@angular/common/http';
 import {Observable, of} from 'rxjs';
 import {Category} from '../model/category';
+import {RankMapping} from '../model/rankmapping';
 
 @Injectable({
   providedIn: 'root'
@@ -59,5 +60,18 @@ export class CardService {
     return this.http.post<boolean>('/api/categories/remove', {
       name,
     });
+  }
+
+  updateCardStatus(id: number, status: number): Observable<number> {
+    return this.http.post<number>('/api/cards/updateStatus', {
+      id,
+      status,
+    });
+  }
+
+  updateCardRank(rankmappings: RankMapping[]): Observable<number> {
+    return this.http.post<number>('/api/cards/updateRank',
+      rankmappings
+    );
   }
 }

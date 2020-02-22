@@ -3,6 +3,7 @@ create table if not exists card_item (
     title varchar(100) not null,
     description text,
     card_status integer,
+    rank integer default 0,
     category varchar(100) not null,
     create_time integer
 );
