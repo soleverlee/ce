@@ -16,6 +16,8 @@
     新增任务
   </button>
   <div cdkDrag *ngFor="let card of cards">
-    <app-kanban-card [card]="card"></app-kanban-card>
+    <app-kanban-card [card]="card"
+    (cardRemoved)="onCardRemoved($event)"
+    ></app-kanban-card>
   </div>
 </div>

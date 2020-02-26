@@ -1,5 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CardItem} from '../../model/card';
+import {MatSnackBar} from '@angular/material';
+import {CardService} from '../../service/card.service';
 
 @Component({
   selector: 'app-kanban-card',
@@ -9,10 +11,21 @@ import {CardItem} from '../../model/card';
 export class KanbanCardComponent implements OnInit {
   @Input() card: CardItem;
 
-  constructor() {
+  @Output() cardRemoved = new EventEmitter();
+
+  constructor(private snackBar: MatSnackBar,
+              private cardService: CardService) {
   }
 
   ngOnInit() {
   }
 
+  removeCard(cardId: number) {
+    this.cardService.removeCard(cardId)
+      .subscribe(success => {
+        this.cardRemoved.emit(cardId);
+      }, error => {
+        this.snackBar.open('删除失败:' + cardId);
+      });
+  }
 }

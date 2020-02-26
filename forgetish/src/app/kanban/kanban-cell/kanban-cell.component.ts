@@ -1,10 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CardService} from '../../service/card.service';
 import {CardItem} from '../../model/card';
-import {CardStatus} from '../../model/card-status';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {MatDialog, MatSnackBar} from '@angular/material';
-import {CategoryDialogComponent} from '../../category-dialog/category-dialog.component';
 import {CardDialogComponent} from '../../card-dialog/card-dialog.component';
 
 @Component({
@@ -77,5 +75,9 @@ export class KanbanCellComponent implements OnInit {
           this.snackBar.open('创建任务失败', result.title);
         });
     });
+  }
+
+  onCardRemoved(id: any) {
+    this.refresh();
   }
 }

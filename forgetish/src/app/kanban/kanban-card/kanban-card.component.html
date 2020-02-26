@@ -14,7 +14,7 @@
   <div>
     <i [matMenuTriggerFor]="cardMenu" class="iconfont iconellipsis menu-trigger"></i>
     <mat-menu #cardMenu="matMenu" xPosition="before">
-      <button mat-menu-item>删除</button>
+      <button mat-menu-item (click)="removeCard(card.cardId)">删除</button>
       <button mat-menu-item>编辑</button>
     </mat-menu>
   </div>

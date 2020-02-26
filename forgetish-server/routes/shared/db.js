@@ -57,6 +57,11 @@ async function moveCard(id, category) {
   return db.run("update card_item set category=? where card_id=?", category, id);
 }
 
+async function removeCard(id) {
+  const db = await getDatabase();
+  return db.run("update card_item set card_status=? where card_id=?", -1, id);
+}
+
 async function updateCardStatus(id, status) {
   const db = await getDatabase();
   return db.run("update card_item set card_status=? where card_id=?", status, id);
@@ -76,11 +81,6 @@ async function updateCardRanking(rankmapping) {
 async function removeCategory(name) {
   const db = await getDatabase();
   return db.run("delete from category where name=?", name);
-}
-
-async function removeCard(id) {
-  const db = await getDatabase();
-  return db.run("delete from card_item where card_id=?", id);
 }
 
 module.exports = {
