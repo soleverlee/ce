@@ -1,4 +1,5 @@
 .kanban-card {
+  cursor: pointer;
   display: flex;
   flex-direction: row;
   border-radius: 5px;
@@ -26,4 +27,12 @@
   font-size: 12px;
   margin-top: 5px;
   color: lightcoral;
+}
+
+.card-content {
+  flex: 1;
+}
+
+.menu-trigger {
+  font-size: 20px;
 }

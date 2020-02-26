@@ -22,3 +22,12 @@ body {
   display: flex;
   flex-direction: row;
 }
+
+.cdk-drag-preview {
+  box-shadow: -3px -3px 18px -6px rgba(0, 145, 77, 1);
+}
+
+.cdk-drag-placeholder .kanban-card {
+  border: 1px solid cornflowerblue;
+}
+

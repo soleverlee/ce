@@ -1,7 +1,6 @@
 <div class="kanban-card">
   <div class="card-title">
     <span class="card-id">#{{card.cardId}}</span>
-
   </div>
   <div class="card-content">
     <div class="card-title">{{card.title}}</div>
@@ -11,5 +10,12 @@
     <div class="card-category">
       {{card.category}}
     </div>
+  </div>
+  <div>
+    <i [matMenuTriggerFor]="cardMenu" class="iconfont iconellipsis menu-trigger"></i>
+    <mat-menu #cardMenu="matMenu" xPosition="before">
+      <button mat-menu-item>删除</button>
+      <button mat-menu-item>编辑</button>
+    </mat-menu>
   </div>
 </div>
