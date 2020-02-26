@@ -13,6 +13,7 @@ import {MatButtonModule, MatDialogModule, MatInputModule, MatSidenavModule, MatS
 import {CategoryDialogComponent} from './category-dialog/category-dialog.component';
 import {FormsModule} from '@angular/forms';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import {CardDialogComponent} from './card-dialog/card-dialog.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     KanbanComponent,
     KanbanCellComponent,
     KanbanCardComponent,
-    CategoryDialogComponent
+    CategoryDialogComponent,
+    CardDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +40,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
   ],
   entryComponents: [
     CategoryDialogComponent,
+    CardDialogComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

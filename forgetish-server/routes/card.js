@@ -53,4 +53,10 @@ router.post('/updateRank', async function (req, res) {
   res.send(rows);
 });
 
+router.post('/', async function (req, res) {
+  const {category, title, description} = req.body;
+  const rows = await db.createCard(category, title, description);
+  res.send(rows);
+});
+
 module.exports = router;

@@ -19,9 +19,9 @@ export class DashboardComponent implements OnInit {
   ztreeObject: any;
 
   constructor(
-    private _snackBar: MatSnackBar,
+    private snackBar: MatSnackBar,
     private cardService: CardService,
-    public dialog: MatDialog) {
+    private dialog: MatDialog) {
     console.log('card service:', this.cardService);
   }
 
@@ -58,7 +58,7 @@ export class DashboardComponent implements OnInit {
         .subscribe(success => {
         }, error => {
           console.error(error);
-          this._snackBar.open('移动任务失败', selected.name);
+          this.snackBar.open('移动任务失败', selected.name);
           this.refreshTree();
         });
     } else {
@@ -66,7 +66,7 @@ export class DashboardComponent implements OnInit {
         .subscribe(success => {
         }, error => {
           console.error(error);
-          this._snackBar.open('移动分类失败', selected.name);
+          this.snackBar.open('移动分类失败', selected.name);
           this.refreshTree();
         });
     }
@@ -129,7 +129,7 @@ export class DashboardComponent implements OnInit {
         .subscribe(success => {
           this.refreshTree();
         }, error => {
-          this._snackBar.open('创建分类失败', result.categoryName);
+          this.snackBar.open('创建分类失败', result.categoryName);
         });
     });
   };
@@ -144,13 +144,13 @@ export class DashboardComponent implements OnInit {
       this.cardService.removeCard(node.rawCard.card_id).subscribe(success => {
         this.ztreeObject.removeNode(selected[0]);
       }, error => {
-        this._snackBar.open('删除任务失败', node.name);
+        this.snackBar.open('删除任务失败', node.name);
       });
     } else {
       this.cardService.removeCategory(node.name).subscribe(success => {
         this.ztreeObject.removeNode(selected[0]);
       }, error => {
-        this._snackBar.open('删除分类失败', node.name);
+        this.snackBar.open('删除分类失败', node.name);
       });
     }
   };

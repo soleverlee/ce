@@ -35,6 +35,13 @@ async function getCategories() {
   return executeQuery("select * from category order by parent_category");
 }
 
+async function createCard(category, title, description) {
+  const db = await getDatabase();
+  return db.run(`insert into card_item
+  (category, title, description, create_time, card_status)
+  values (?, ?, ?, ?, ?)`, category, title, description, Date.now(), 0);
+}
+
 async function createCategory(name, parentCategory) {
   const db = await getDatabase();
   return db.run("insert into category(name, parent_category) values (?, ?)", name, parentCategory);
@@ -58,7 +65,7 @@ async function updateCardStatus(id, status) {
 async function updateCardRanking(rankmapping) {
   const db = await getDatabase();
   const statement = await db.prepare("update card_item set rank=? where card_id=?");
-  for (let i = 0; i < rankmapping.length; i++){
+  for (let i = 0; i < rankmapping.length; i++) {
     console.log('->', rankmapping[i].rank, rankmapping[i].id);
     await statement.run(rankmapping[i].rank, rankmapping[i].id);
   }
@@ -87,5 +94,6 @@ module.exports = {
   moveCategory,
   removeCategory,
   moveCard,
+  createCard,
   removeCard,
 };

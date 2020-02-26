@@ -50,6 +50,14 @@ export class CardService {
     });
   }
 
+  createCard(category: string, title: string, description: string):
+    Observable<boolean> {
+    return this.http.post<boolean>('/api/cards', {
+      category,
+      title, description,
+    });
+  }
+
   removeCard(id: number): Observable<boolean> {
     return this.http.post<boolean>('/api/cards/remove', {
       id,

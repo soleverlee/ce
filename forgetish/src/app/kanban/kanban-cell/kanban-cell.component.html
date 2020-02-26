@@ -8,6 +8,7 @@
      (cdkDropListDropped)="drop($event)"
      id="card-drag-{{cardStatus}}">
   <button *ngIf="cardStatus == 0"
+          (click)="openAddCardDialog()"
           mat-button
           color="primary"
           type="button"

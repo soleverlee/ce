@@ -3,6 +3,9 @@ import {CardService} from '../../service/card.service';
 import {CardItem} from '../../model/card';
 import {CardStatus} from '../../model/card-status';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {MatDialog, MatSnackBar} from '@angular/material';
+import {CategoryDialogComponent} from '../../category-dialog/category-dialog.component';
+import {CardDialogComponent} from '../../card-dialog/card-dialog.component';
 
 @Component({
   selector: 'app-kanban-cell',
@@ -15,17 +18,23 @@ export class KanbanCellComponent implements OnInit {
 
   cards: CardItem[] = [];
 
-  constructor(private cardService: CardService) {
+  constructor(private cardService: CardService,
+              private snackBar: MatSnackBar,
+              private dialog: MatDialog) {
   }
 
   ngOnInit() {
+    this.refresh();
+  }
+
+  refresh() {
     this.cardService.getCards(this.cardStatus)
       .subscribe(result => {
         this.cards = result;
       });
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<CardItem[]>) {
     console.log(event.container.data, event.previousIndex, event.currentIndex);
     const status = Number(event.container.id.replace('card-drag-', ''));
     const card = event.previousContainer.data[event.previousIndex];
@@ -50,5 +59,23 @@ export class KanbanCellComponent implements OnInit {
       .subscribe(result => {
         console.log(result);
       });
+  }
+
+  openAddCardDialog() {
+    const dialogRef = this.dialog.open(CardDialogComponent, {
+      width: '400px',
+      data: {},
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (!result) {
+        return;
+      }
+      this.cardService.createCard(result.category || 'Default', result.title, result.description)
+        .subscribe(success => {
+          this.refresh();
+        }, error => {
+          this.snackBar.open('创建任务失败', result.title);
+        });
+    });
   }
 }

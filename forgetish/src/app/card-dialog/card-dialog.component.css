@@ -1,0 +1,8 @@
+.mat-dialog-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.confirm-button {
+  flex: 1;
+}
