@@ -17,7 +17,8 @@
   </button>
   <div cdkDrag *ngFor="let card of cards">
     <app-kanban-card [card]="card"
-    (cardRemoved)="onCardRemoved($event)"
+                     (cardRemoved)="onCardRemoved($event)"
+                     (cardUpdated)="onCardUpdated($event)"
     ></app-kanban-card>
   </div>
 </div>

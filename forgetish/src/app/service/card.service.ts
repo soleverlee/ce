@@ -58,6 +58,15 @@ export class CardService {
     });
   }
 
+  updateCard(id: number, category: string, title: string, description: string):
+    Observable<number> {
+    return this.http.post<number>('/api/cards/update', {
+      id,
+      category,
+      title, description,
+    });
+  }
+
   removeCard(id: number): Observable<boolean> {
     return this.http.post<boolean>('/api/cards/remove', {
       id,

@@ -42,6 +42,12 @@ async function createCard(category, title, description) {
   values (?, ?, ?, ?, ?)`, category, title, description, Date.now(), 0);
 }
 
+async function updateCard(id, category, title, description) {
+  const db = await getDatabase();
+  return db.run(`update card_item set category=?, title=?, description=? where card_id=?`,
+    category, title, description, id);
+}
+
 async function createCategory(name, parentCategory) {
   const db = await getDatabase();
   return db.run("insert into category(name, parent_category) values (?, ?)", name, parentCategory);
@@ -96,4 +102,5 @@ module.exports = {
   moveCard,
   createCard,
   removeCard,
+  updateCard,
 };

@@ -1,7 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CardItem} from '../../model/card';
-import {MatSnackBar} from '@angular/material';
+import {MatDialog, MatSnackBar} from '@angular/material';
 import {CardService} from '../../service/card.service';
+import {CardDialogComponent} from '../../card-dialog/card-dialog.component';
 
 @Component({
   selector: 'app-kanban-card',
@@ -13,7 +14,10 @@ export class KanbanCardComponent implements OnInit {
 
   @Output() cardRemoved = new EventEmitter();
 
+  @Output() cardUpdated = new EventEmitter();
+
   constructor(private snackBar: MatSnackBar,
+              private dialog: MatDialog,
               private cardService: CardService) {
   }
 
@@ -27,5 +31,24 @@ export class KanbanCardComponent implements OnInit {
       }, error => {
         this.snackBar.open('删除失败:' + cardId);
       });
+  }
+
+  editCard(card: CardItem) {
+    console.log(card);
+    const dialogRef = this.dialog.open(CardDialogComponent, {
+      width: '400px',
+      data: {...card},
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (!result) {
+        return;
+      }
+      this.cardService.updateCard(result.cardId, result.category || 'Default', result.title, result.description)
+        .subscribe(success => {
+          this.cardUpdated.emit(card);
+        }, error => {
+          this.snackBar.open('创建任务失败', result.title);
+        });
+    });
   }
 }

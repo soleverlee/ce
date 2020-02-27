@@ -80,4 +80,8 @@ export class KanbanCellComponent implements OnInit {
   onCardRemoved(id: any) {
     this.refresh();
   }
+
+  onCardUpdated($event: any) {
+    this.refresh();
+  }
 }

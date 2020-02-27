@@ -59,6 +59,12 @@ router.post('/', async function (req, res) {
   res.send(rows);
 });
 
+router.post('/update', async function (req, res) {
+  const {id, category, title, description} = req.body;
+  const rows = await db.updateCard(id, category, title, description);
+  res.send(rows);
+});
+
 router.post('/delete', async function (req, res) {
   const {id} = req.body;
   const rows = await db.removeCard(id);
