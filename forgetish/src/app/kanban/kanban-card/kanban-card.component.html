@@ -7,8 +7,9 @@
     <div class="card-description">
       {{card.description}}
     </div>
-    <div class="card-category">
-      {{card.category}}
+    <div class="card-tags" *ngIf="card.tags">
+      <span *ngFor="let tag of card.tags.split(',')"
+        class="card-tag">{{tag}}</span>
     </div>
   </div>
   <div>

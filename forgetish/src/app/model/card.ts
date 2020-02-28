@@ -5,4 +5,5 @@ export interface CardItem {
   description: string;
   createdTime: number;
   cardStatus: number;
+  tags: string;
 }

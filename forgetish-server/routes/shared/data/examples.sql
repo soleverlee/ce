@@ -5,6 +5,7 @@ create table if not exists card_item (
     card_status integer,
     rank integer default 0,
     category varchar(100) not null,
+    tags text,
     create_time integer
 );
 
@@ -22,10 +23,10 @@ create table if not exists card_status (
 insert into card_status (card_status, display, name)
 values
 (-1, 0, '已删除'),
-(0, 1, '待实施'),
-(1, 1, '正在进行'),
-(2, 1, '已完成'),
-(3, 1, '搁置');
+(0, 1, '待计划'),
+(1, 1, '列入计划'),
+(2, 1, '进行中'),
+(3, 1, '已完成');
 
 insert into category (parent_category, name)
 values

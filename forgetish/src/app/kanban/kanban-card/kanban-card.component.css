@@ -24,10 +24,16 @@
   font-size: 12px;
 }
 
-.card-category {
+.card-tags {
   font-size: 12px;
   margin-top: 5px;
-  color: lightcoral;
+}
+
+.card-tag {
+  color: white;
+  padding: 2px 5px;
+  background: #004e8f;
+  margin-right: 10px;
 }
 
 .card-content {
@@ -36,4 +42,8 @@
 
 .menu-trigger {
   font-size: 20px;
+}
+
+.card-blocked {
+  background: #ffc1c1;
 }

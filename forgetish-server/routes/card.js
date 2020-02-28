@@ -12,6 +12,7 @@ router.get('/', async function (req, res) {
       title: row.title,
       description: row.description,
       cardStatus: row.card_status,
+      tags: row.tags,
       createTime: row.createTime,
     };
   });
