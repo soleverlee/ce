@@ -9,7 +9,24 @@
     </div>
     <div class="card-tags" *ngIf="card.tags">
       <span *ngFor="let tag of card.tags.split(',')"
-        class="card-tag">{{tag}}</span>
+            class="card-tag">{{tag}}</span>
+    </div>
+    <div class="card-progress">
+      <span *ngFor="let item of [].constructor(10); let i = index"
+            class="progress-item"></span>
+    </div>
+    <div class="card-checklist" *ngIf="expanded">
+      <mat-checkbox color="primary">Check me!</mat-checkbox>
+      <mat-checkbox color="primary">Check me!</mat-checkbox>
+      <mat-checkbox color="primary">Check me!</mat-checkbox>
+      <mat-checkbox color="primary">Check me!</mat-checkbox>
+    </div>
+    <div class="card-checklist-trigger">
+      <button mat-button
+              (click)="expandCheckList()"
+              type="button">
+        <span class="iconfont {{expanded ? 'iconarrow-up': 'iconarrow-down'}}"></span>
+      </button>
     </div>
   </div>
   <div>

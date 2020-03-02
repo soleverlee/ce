@@ -9,6 +9,12 @@ create table if not exists card_item (
     create_time integer
 );
 
+create table if not exists card_checklist_item (
+  card_id integer not null,
+  finished integer not null default 0,
+  content varchar(100) not null
+);
+
 create table if not exists category (
     name varchar(100) not null primary key,
     parent_category varchar(100)

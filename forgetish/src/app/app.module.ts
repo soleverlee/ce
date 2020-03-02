@@ -10,7 +10,7 @@ import {KanbanCardComponent} from './kanban/kanban-card/kanban-card.component';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
-  MatButtonModule,
+  MatButtonModule, MatCheckboxModule,
   MatDialogModule,
   MatInputModule,
   MatMenuModule,
@@ -46,6 +46,7 @@ import {CardDialogComponent} from './card-dialog/card-dialog.component';
     MatSnackBarModule,
     MatMenuModule,
     DragDropModule,
+    MatCheckboxModule,
   ],
   entryComponents: [
     CategoryDialogComponent,

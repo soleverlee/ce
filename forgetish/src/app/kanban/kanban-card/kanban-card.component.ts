@@ -16,6 +16,8 @@ export class KanbanCardComponent implements OnInit {
 
   @Output() cardUpdated = new EventEmitter();
 
+  expanded = false;
+
   constructor(private snackBar: MatSnackBar,
               private dialog: MatDialog,
               private cardService: CardService) {
@@ -50,5 +52,9 @@ export class KanbanCardComponent implements OnInit {
           this.snackBar.open('创建任务失败', result.title);
         });
     });
+  }
+
+  expandCheckList() {
+    this.expanded = !this.expanded;
   }
 }
